@@ -10,11 +10,15 @@ function App() {
     mutationFn: () => {
       return fetchResponse(chat);
     },
-    onSuccess: (data) =>
-      setChat((prev) => [
-        ...prev,
-        { sender: "ai", message: data.message.replace(/^\n\n/, "") },
-      ]),
+onSuccess: (data) => {
+  if (data.message) {
+    setChat((prev) => [
+      ...prev,
+      { sender: "ai", message: data.message.replace(/^\n\n/, "") },
+    ]);
+  }
+}
+
   });
 
   const sendMessage = async (message) => {
@@ -30,7 +34,7 @@ function App() {
 
       {/* header */}
       <div className="uppercase font-bold  text-2xl text-center mb-3">
-        ChatGpt2.0
+        RAI
       </div>
 
       {/* body */}
